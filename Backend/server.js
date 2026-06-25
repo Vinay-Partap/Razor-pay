@@ -1,5 +1,6 @@
 const express = require('express');
 const cookieParser = require('cookie-parser');
+const path = require('path');
 require('dotenv').config();
 
 const app = express();
@@ -17,6 +18,14 @@ app.get('/health', (req, res) => {
 
 // 2. Mount API specification prefix
 app.use('/rest', apiRouter);
+
+// 3. Serve Frontend static files
+app.use(express.static(path.join(__dirname, '../Frontend')));
+
+// 4. Client SPA route fallback - serve index.html for non-API routes
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../Frontend/index.html'));
+});
 
 // Global Error Handler
 app.use((err, req, res, next) => {
