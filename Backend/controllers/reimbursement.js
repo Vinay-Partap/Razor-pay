@@ -205,6 +205,7 @@ const getReimbursementsPipeline = async (req, res, next) => {
     // Format the response structure cleanly to match tester layouts [cite: 177, 181]
     const formattedReimbursements = claims.map(c => ({
       id: c.id,
+      employee_id: c.employee_id,
       title: c.title,
       description: c.description,
       amount: c.amount,
@@ -248,6 +249,7 @@ const getSubordinateReimbursements = async (req, res, next) => {
 
     const formattedReimbursements = claims.map(c => ({
       id: c.id,
+      employee_id: c.employee_id,
       title: c.title,
       description: c.description,
       amount: c.amount,
